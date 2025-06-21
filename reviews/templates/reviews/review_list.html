@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>Відгуки</title></head>
+<body>
+  <h1>Відгуки</h1>
+  {% if user.is_authenticated %}
+    <p>Вітаю, {{ user.username }}! <a href="{% url 'logout' %}">Вийти</a> | <a href="{% url 'add_review' %}">Додати відгук</a></p>
+  {% else %}
+    <p><a href="{% url 'login' %}">Увійти</a> | <a href="{% url 'register' %}">Реєстрація</a></p>
+  {% endif %}
+  <ul>
+    {% for review in reviews %}
+      <li><strong>{{ review.title }}</strong> від {{ review.author.username }} <br> {{ review.content }} <br> <small>{{ review.pub_date }}</small></li>
+    {% empty %}
+      <li>Ще немає відгуків.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
